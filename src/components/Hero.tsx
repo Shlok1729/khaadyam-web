@@ -4,15 +4,14 @@ import { ArrowRight, Award, Leaf, Star } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    /* Changed bg-white to a custom off-white/cream and added a subtle gradient */
+  
     <section className="relative bg-[#FAF9F6] py-12 md:py-24 overflow-hidden">
       
-      {/* 1. STYLISH BACKGROUND ELEMENTS */}
-      {/* Soft Frosty Blur in the corner */}
+     
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#1a4332]/5 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute top-1/2 -right-24 w-80 h-80 bg-[#d4af37]/10 rounded-full blur-[100px] pointer-events-none"></div>
       
-      {/* Optional: Very subtle grain/noise overlay (SVG pattern) */}
+    
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/felt-paper.png')]"></div>
 
       <div className="container mx-auto px-4 md:px-10 relative z-10">
@@ -28,7 +27,7 @@ export const Hero = () => {
               </span>
             </div>
 
-            {/* Typography Heading */}
+           
             <h1 className="font-serif text-6xl md:text-8xl lg:text-[110px] text-neutral-900 leading-[0.85] tracking-tighter mb-8">
               Taste of <br />
               <span className="text-[#1a4332] italic">Tradition.</span>
@@ -63,7 +62,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* RIGHT VISUAL: Tilted Card */}
+          
           <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[480px] aspect-[4/5] rounded-[2.5rem] bg-[#00477a] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] transition-transform duration-700 hover:rotate-0 -rotate-3 group overflow-hidden">
               
@@ -73,10 +72,8 @@ export const Hero = () => {
                 className="w-full h-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-110"
               />
 
-              {/* Frosty Overlay on the Image */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10"></div>
 
-              {/* Floating Product Tag Card - Glassmorphism style */}
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-xl p-5 rounded-2xl shadow-2xl flex items-center justify-between border border-white/40">
                 <div>
                   <h3 className="font-serif text-lg font-bold text-neutral-900 mb-1">Spicy Nippat</h3>

@@ -29,7 +29,7 @@ export const Testimonials = () => {
 
   return (
     <section className="bg-[#1a4332] py-20 md:py-32 overflow-hidden relative">
-      {/* Subtle Geometric Pattern Overlay (Optional) */}
+      
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="h-full w-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
       </div>
@@ -37,7 +37,7 @@ export const Testimonials = () => {
       <div className="container mx-auto px-4 md:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* LEFT SIDE: Heading & Navigation */}
+          
           <div className="text-white max-w-xl">
             <span className="inline-block px-4 py-1.5 mb-8 text-[10px] font-bold tracking-[0.2em] uppercase bg-white/10 border border-white/20 rounded-full">
               Testimonials
@@ -62,7 +62,7 @@ export const Testimonials = () => {
             </div>
           </div>
 
-          {/* RIGHT SIDE: The Testimonial Card */}
+         
           <div className="relative">
             <div className="bg-[#24523e] p-8 md:p-12 rounded-[2rem] shadow-2xl border border-white/5 transition-all duration-500">
               {/* Stars */}
@@ -91,7 +91,7 @@ export const Testimonials = () => {
               </div>
             </div>
             
-            {/* Visual Decoration: Floating Dot */}
+            
             <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#d4af37]/10 rounded-full blur-3xl"></div>
           </div>
 

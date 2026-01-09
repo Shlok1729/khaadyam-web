@@ -8,14 +8,14 @@ interface ProductProps {
   description: string;
   image: string;
   isSoldOut?: boolean;
-  badge?: string; // "BEST SELLER", "NEW", etc.
-  isSpecialTitle?: boolean; // For the green title look
+  badge?: string; // "BEST SELLER"
+  isSpecialTitle?: boolean; 
 }
 
 export const ProductCard = ({ name, price, description, image, isSoldOut, badge, isSpecialTitle }: ProductProps) => {
   return (
     <div className={`group flex flex-col ${isSoldOut ? 'opacity-60' : ''}`}>
-      {/* IMAGE CONTAINER */}
+      
       <div className="relative aspect-square rounded-2xl overflow-hidden bg-neutral-100 mb-4">
         <Image 
           src={image} 
@@ -34,7 +34,7 @@ export const ProductCard = ({ name, price, description, image, isSoldOut, badge,
           </div>
         )}
 
-        {/* Out of Stock Overlay */}
+        
         {isSoldOut && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-[2px]">
             <span className="bg-neutral-900/90 text-white px-5 py-2 rounded-full text-xs font-bold shadow-xl">
@@ -43,7 +43,7 @@ export const ProductCard = ({ name, price, description, image, isSoldOut, badge,
           </div>
         )}
 
-        {/* Quick Add Button (Bottom Right) */}
+        
         {!isSoldOut && (
           <button className="absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border border-neutral-100 hover:scale-110 active:scale-95 transition-all text-neutral-800">
             <Plus size={20} strokeWidth={2.5} />
@@ -51,7 +51,7 @@ export const ProductCard = ({ name, price, description, image, isSoldOut, badge,
         )}
       </div>
 
-      {/* TEXT DETAILS */}
+      
       <div className="flex flex-col gap-1">
         <div className="flex justify-between items-start gap-4">
           <h3 className={`font-serif text-lg font-bold leading-tight flex-1 

@@ -6,7 +6,7 @@ import { Search, User, ShoppingBag, Menu } from 'lucide-react';
 export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-100">
-      {/* We use 'container mx-auto' to keep everything centered and 'px-4' for mobile padding */}
+      
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           

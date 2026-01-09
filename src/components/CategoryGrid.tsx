@@ -1,4 +1,4 @@
-"use client"; // Required for useRef and onClick events
+"use client";
 import React, { useRef } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
@@ -13,19 +13,16 @@ const categories = [
 ];
 
 export const CategoryGrid = () => {
-  // 1. Create a reference to the scrollable div
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // 2. Logic to handle the scroll
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      
-      // We scroll by approximately 2 items width (adjust 300 as needed)
-      const scrollTo = direction === 'left' 
-        ? scrollLeft - 300 
-        : scrollLeft + 300;
-      
+      const { scrollLeft } = scrollRef.current;
+      const scrollTo =
+        direction === 'left'
+          ? scrollLeft - 300
+          : scrollLeft + 300;
+
       scrollRef.current.scrollTo({
         left: scrollTo,
         behavior: 'smooth',
@@ -36,22 +33,19 @@ export const CategoryGrid = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4 lg:px-6">
-        
-        {/* HEADER SECTION */}
         <div className="flex items-end justify-between mb-12">
           <h2 className="font-serif text-3xl md:text-5xl text-neutral-900 tracking-tight">
             Shop by Category
           </h2>
-          
+
           <div className="flex gap-3">
-            {/* 3. Attach the click handlers */}
-            <button 
+            <button
               onClick={() => scroll('left')}
               className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-neutral-200 hover:border-[#1a4332] hover:text-[#1a4332] transition-all group active:scale-90"
             >
               <ArrowLeft size={20} strokeWidth={1.5} />
             </button>
-            <button 
+            <button
               onClick={() => scroll('right')}
               className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-neutral-200 hover:border-[#1a4332] hover:text-[#1a4332] transition-all group active:scale-90"
             >
@@ -60,23 +54,29 @@ export const CategoryGrid = () => {
           </div>
         </div>
 
-        {/* CATEGORIES ROW */}
-        {/* 4. Assign the ref to this div */}
-        <div 
+        <div
           ref={scrollRef}
           className="flex overflow-x-auto no-scrollbar gap-6 md:gap-10 pb-4 scroll-smooth"
         >
           {categories.map((cat, index) => (
-            <div key={index} className="flex-shrink-0 group cursor-pointer w-[140px] md:w-[180px]">
+            <div
+              key={index}
+              className="flex-shrink-0 group cursor-pointer w-[140px] md:w-[180px]"
+            >
               <div className="relative aspect-square rounded-full overflow-hidden mb-5 border-4 border-white shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:scale-105">
-                <img 
-                  src={cat.img} 
-                  alt={cat.name} 
+                <img
+                  src={cat.img}
+                  alt={cat.name}
                   className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
                 />
               </div>
-              <h3 className={`text-center font-medium text-[15px] md:text-lg transition-colors
-                ${cat.isHighlight ? 'text-[#1a4332]' : 'text-neutral-900 group-hover:text-[#1a4332]'}`}>
+              <h3
+                className={`text-center font-medium text-[15px] md:text-lg transition-colors ${
+                  cat.isHighlight
+                    ? 'text-[#1a4332]'
+                    : 'text-neutral-900 group-hover:text-[#1a4332]'
+                }`}
+              >
                 {cat.name}
               </h3>
             </div>

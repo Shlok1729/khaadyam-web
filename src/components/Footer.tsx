@@ -9,7 +9,6 @@ export const Footer = () => {
       <div className="container mx-auto px-4 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           
-          {/* COLUMN 1: BRAND INFO */}
           <div className="flex flex-col">
             <Link href="/" className="flex items-center gap-2 mb-8">
                <div className="w-8 h-8 bg-[#1a4332] rounded flex items-center justify-center p-1.5">
@@ -36,7 +35,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* COLUMN 2: SHOP */}
+        
           <div>
             <h4 className="font-bold text-neutral-900 mb-8 tracking-tight">Shop</h4>
             <ul className="space-y-4 text-neutral-500 font-light">
@@ -48,7 +47,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* COLUMN 3: COMPANY */}
+          
           <div>
             <h4 className="font-bold text-neutral-900 mb-8 tracking-tight">Company</h4>
             <ul className="space-y-4 text-neutral-500 font-light">
@@ -60,7 +59,7 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* COLUMN 4: NEWSLETTER */}
+          
           <div>
             <h4 className="font-bold text-neutral-900 mb-8 tracking-tight">Newsletter</h4>
             <p className="text-neutral-500 text-sm mb-6 leading-relaxed font-light">
