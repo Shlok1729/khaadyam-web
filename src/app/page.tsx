@@ -5,50 +5,11 @@ import { ProductCard } from "@/components/ProductCard";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { Testimonials } from "@/components/Testimonials";
 import { Footer } from "@/components/Footer";
+import { prisma } from "@/lib/prisma";
 
-const BESTSELLERS = [
-  { id: 1, name: "Special Malnad Nippattu", price: 160, weight: "250g", image: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?q=80&w=800", isNoGarlic: true },
-  { id: 2, name: "Handmade Butter Chakli", price: 145, weight: "200g", image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?q=80&w=800", isSoldOut: true },
-  { id: 3, name: "Classic Kodubale", price: 130, weight: "180g", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=800", isNoOnion: true },
-  { id: 4, name: "Spicy Banana Chips (Pepper)", price: 120, weight: "200g", image: "https://images.unsplash.com/photo-1613919113166-796c54d58232?q=80&w=800" },
-];
+export default async function Home() {
+  const products = await prisma.product.findMany();
 
-const BEST_OF_MONTH = [
-  { 
-    id: 1, 
-    name: "Kai Muruku", 
-    price: 145, 
-    description: "Rice flour, Urad dal, Butter", 
-    image: "/Kai-Murukku.webp", 
-    badge: "BEST SELLER" 
-  },
-  { 
-    id: 2, 
-    name: "Millet Mixture", 
-    price: 180, 
-    description: "Foxtail millet, Peanuts", 
-    image: "/millet.jpg" 
-  },
-  { 
-    id: 3, 
-    name: "Besan Laddu", 
-    price: 220, 
-    description: "Ghee, Gram flour, Sugar", 
-    image: "/laddo.jpg", 
-    badge: "NEW",
-    isSpecialTitle: true 
-  },
-  { 
-    id: 4, 
-    name: "Shenga Chutney", 
-    price: 95, 
-    description: "Peanuts, Red chili, Garlic", 
-    image: "/shenga.webp", 
-    isSoldOut: true 
-  },
-];
-
-export default function Home() {
   return (
     <main className="min-h-screen bg-[#FAF9F6] selection:bg-[#1a4332] selection:text-white">
       {/* 1. DECORATIVE BACKGROUND BLOBS (Place these at the top) */}
@@ -62,10 +23,10 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
-        
+
         <Navbar />
         <Hero />
-        
+
         {/* Category Grid Section - Give it a slightly different tint to separate it */}
         <div className="bg-white/30 backdrop-blur-sm border-y border-neutral-200/30">
           <CategoryGrid />
@@ -86,10 +47,10 @@ export default function Home() {
                 Authentic recipes that have stood the test of time, now delivered fresh to your doorstep.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
-              {BEST_OF_MONTH.map((product) => (
-                <ProductCard key={product.id} {...product} />
+              {products.map((product) => (
+                <ProductCard key={product.id} {...product} badge={product.badge || undefined} />
               ))}
             </div>
           </div>

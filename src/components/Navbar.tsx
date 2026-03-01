@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, User, ShoppingBag, Menu } from 'lucide-react';
+import { Search, User, ShoppingBag, Menu, Link2Icon } from 'lucide-react';
 
 export const Navbar = () => {
   return (
@@ -45,9 +45,9 @@ export const Navbar = () => {
             <button className="hover:text-[#1a4332] transition-colors hidden sm:block">
               <Search size={20} strokeWidth={1.5} />
             </button>
-            <button className="hover:text-[#1a4332] transition-colors hidden sm:block">
+            <Link href="/account" className="hover:text-[#1a4332] transition-colors hidden sm:block">
               <User size={20} strokeWidth={1.5} />
-            </button>
+            </Link>
             <button className="relative group hover:text-[#1a4332] transition-colors">
               <ShoppingBag size={22} strokeWidth={1.5} />
               <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#1a4332] border-2 border-white rounded-full"></span>
