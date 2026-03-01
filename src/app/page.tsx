@@ -37,7 +37,7 @@ export default async function Home() {
         </div>
 
         {/* Best of the Month - This will now sit on the off-white background */}
-        <section className="py-24 bg-[#F3F6F4] border-t-0
+        <section className="py-24 md:py-16 bg-[#F3F6F4] border-t-0
   bg-[url('https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png')] bg-repeat">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-16">

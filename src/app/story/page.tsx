@@ -65,8 +65,9 @@ export default function StoryPage() {
                     </div>
                 </section>
 
-                <Footer />
+                
             </div>
+            <Footer />
         </main>
     );
 }

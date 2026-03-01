@@ -90,7 +90,9 @@ export default async function ShopPage(props: {
                         </div>
                     )}
                 </div>
+                <Footer />
             </div>
+            
         </main>
     );
 }
