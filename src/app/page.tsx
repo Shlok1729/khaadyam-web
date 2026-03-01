@@ -8,7 +8,11 @@ import { Footer } from "@/components/Footer";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    where: {
+      isBestOfMonth: true
+    }
+  });
 
   return (
     <main className="min-h-screen bg-[#FAF9F6] selection:bg-[#1a4332] selection:text-white">

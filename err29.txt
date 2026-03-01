@@ -1,0 +1,33 @@
+PrismaClientValidationError: 
+Invalid `prisma.product.create()` invocation in
+C:\Users\shlok\Desktop\khaadyam-web\prisma\seed.ts:122:30
+
+  119 ]
+  120 
+  121 for (const snack of snacks) {
+→ 122     await prisma.product.create({
+            data: {
+              name: "Kai Muruku",
+              price: 145,
+              description: "Traditional hand-twisted crispy snacks made with premium rice flour and butter.",
+              weight: "250g",
+              image: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?q=80&w=800",
+              badge: "BEST SELLER",
+              category: "Savoury Snacks",
+              ~~~~~~~~
+              isBestOfMonth: true,
+              isSoldOut: false,
+          ?   createdAt?: DateTime,
+          ?   updatedAt?: DateTime
+            }
+          })
+
+Unknown argument `category`. Available options are marked with ?.
+    at wn (C:\Users\shlok\Desktop\khaadyam-web\node_modules\@prisma\client\runtime\library.js:29:1363)
+    at $n.handleRequestError (C:\Users\shlok\Desktop\khaadyam-web\node_modules\@prisma\client\runtime\library.js:121:6958)
+    at $n.handleAndLogRequestError (C:\Users\shlok\Desktop\khaadyam-web\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\shlok\Desktop\khaadyam-web\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\shlok\Desktop\khaadyam-web\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async main (C:\Users\shlok\Desktop\khaadyam-web\prisma\seed.ts:122:9) {
+  clientVersion: '5.22.0'
+}
