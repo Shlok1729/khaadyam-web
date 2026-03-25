@@ -1,21 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 
-const prismaClientSingleton = () => {
-  return new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  })
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined
 }
 
-declare const globalThis: {
-  prismaGlobal: ReturnType<typeof prismaClientSingleton>;
-} & typeof global;
+// Lazy initialization: PrismaClient is only created when first accessed,
+// not at module evaluation time. This prevents build failures on Vercel
+// where DATABASE_URL may not be available during the build phase.
+export const prisma = globalForPrisma.prisma ?? new PrismaClient()
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
-
-export { prisma }
-
-if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
