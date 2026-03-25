@@ -138,8 +138,8 @@ export default function AccountPage() {
                     <div className="text-right">
                       <p className="text-base font-bold text-neutral-900 tracking-tight">₹{order.totalAmount}</p>
                       <span className={`text-[9px] font-bold uppercase px-2 py-1 rounded-full border ${order.status === 'DELIVERED'
-                          ? 'bg-[#1a4332]/10 text-[#1a4332] border-[#1a4332]/20'
-                          : 'bg-orange-50 text-orange-600 border-orange-100'
+                        ? 'bg-[#1a4332]/10 text-[#1a4332] border-[#1a4332]/20'
+                        : 'bg-orange-50 text-orange-600 border-orange-100'
                         }`}>
                         {order.status}
                       </span>
