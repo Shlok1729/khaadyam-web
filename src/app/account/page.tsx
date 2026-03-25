@@ -13,17 +13,17 @@ export default function AccountPage() {
   const [addresses, setAddresses] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  
+
   // Profile State
   const [newName, setNewName] = useState("");
-  
+
   // Address State
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [newAddress, setNewAddress] = useState({ street: '', city: '', state: '', zip: '' });
 
   useEffect(() => {
     if (session?.user?.name && !newName) {
-        setNewName(session.user.name);
+      setNewName(session.user.name);
     }
   }, [session]);
 
@@ -60,19 +60,19 @@ export default function AccountPage() {
   const handleUpdateProfile = async () => {
     setIsSaving(true);
     try {
-        const res = await fetch('/api/user', {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: newName })
-        });
-        if (res.ok) {
-            await update({ name: newName });
-            alert("Profile updated successfully!");
-        }
+      const res = await fetch('/api/user', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newName })
+      });
+      if (res.ok) {
+        await update({ name: newName });
+        alert("Profile updated successfully!");
+      }
     } catch (err) {
-        console.error(err);
+      console.error(err);
     } finally {
-        setIsSaving(false);
+      setIsSaving(false);
     }
   };
 
@@ -80,29 +80,29 @@ export default function AccountPage() {
     e.preventDefault();
     setIsSaving(true);
     try {
-        const res = await fetch('/api/addresses', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newAddress)
-        });
-        if (res.ok) {
-            setShowAddressForm(false);
-            setNewAddress({ street: '', city: '', state: '', zip: '' });
-            // Refresh addresses
-            const addrRes = await fetch('/api/addresses');
-            const addrData = await addrRes.json();
-            if (Array.isArray(addrData)) setAddresses(addrData);
-        }
+      const res = await fetch('/api/addresses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newAddress)
+      });
+      if (res.ok) {
+        setShowAddressForm(false);
+        setNewAddress({ street: '', city: '', state: '', zip: '' });
+        // Refresh addresses
+        const addrRes = await fetch('/api/addresses');
+        const addrData = await addrRes.json();
+        if (Array.isArray(addrData)) setAddresses(addrData);
+      }
     } catch (err) {
-        console.error(err);
+      console.error(err);
     } finally {
-        setIsSaving(false);
+      setIsSaving(false);
     }
   };
 
-  const user = { 
-    name: session?.user?.name || "Member", 
-    email: session?.user?.email || "" 
+  const user = {
+    name: session?.user?.name || "Member",
+    email: session?.user?.email || ""
   };
 
   const renderTabContent = () => {
@@ -128,7 +128,7 @@ export default function AccountPage() {
                       <Package className="text-neutral-400" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-neutral-900">Order #KH-{order.id.toString().padStart(4, '0')}</h4>
+                      <h4 className="font-bold text-neutral-900">Order ##KH-{order.id.toString().padStart(4, '0')}</h4>
                       <p className="text-sm text-neutral-500">
                         Placed on {new Date(order.createdAt).toLocaleDateString()} • {order.orderItems.length} {order.orderItems.length === 1 ? 'Item' : 'Items'}
                       </p>
@@ -137,11 +137,10 @@ export default function AccountPage() {
                   <div className="flex items-center gap-8">
                     <div className="text-right">
                       <p className="text-base font-bold text-neutral-900 tracking-tight">₹{order.totalAmount}</p>
-                      <span className={`text-[9px] font-bold uppercase px-2 py-1 rounded-full border ${
-                        order.status === 'DELIVERED' 
-                          ? 'bg-[#1a4332]/10 text-[#1a4332] border-[#1a4332]/20' 
+                      <span className={`text-[9px] font-bold uppercase px-2 py-1 rounded-full border ${order.status === 'DELIVERED'
+                          ? 'bg-[#1a4332]/10 text-[#1a4332] border-[#1a4332]/20'
                           : 'bg-orange-50 text-orange-600 border-orange-100'
-                      }`}>
+                        }`}>
                         {order.status}
                       </span>
                     </div>
@@ -178,54 +177,54 @@ export default function AccountPage() {
         return (
           <div className="space-y-4">
             {showAddressForm ? (
-                <div className="bg-white rounded-3xl p-8 border border-[#1a4332]/20 shadow-xl animate-in slide-in-from-top-4 duration-300">
-                    <div className="flex justify-between items-center mb-6">
-                        <h4 className="font-bold text-xl">Add New Address</h4>
-                        <button onClick={() => setShowAddressForm(false)} className="text-neutral-400 hover:text-neutral-600"><X size={20}/></button>
-                    </div>
-                    <form onSubmit={handleAddAddress} className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input 
-                                placeholder="Street Address" 
-                                required
-                                value={newAddress.street}
-                                onChange={e => setNewAddress({...newAddress, street: e.target.value})}
-                                className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]" 
-                            />
-                            <input 
-                                placeholder="City" 
-                                required
-                                value={newAddress.city}
-                                onChange={e => setNewAddress({...newAddress, city: e.target.value})}
-                                className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]" 
-                            />
-                            <input 
-                                placeholder="State" 
-                                required
-                                value={newAddress.state}
-                                onChange={e => setNewAddress({...newAddress, state: e.target.value})}
-                                className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]" 
-                            />
-                            <input 
-                                placeholder="Zip Code" 
-                                required
-                                value={newAddress.zip}
-                                onChange={e => setNewAddress({...newAddress, zip: e.target.value})}
-                                className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]" 
-                            />
-                        </div>
-                        <button 
-                            type="submit" 
-                            disabled={isSaving}
-                            className="bg-[#1a4332] text-white font-bold px-8 py-3.5 rounded-2xl shadow-xl shadow-[#1a4332]/20 w-full md:w-auto disabled:opacity-50"
-                        >
-                            {isSaving ? <Loader2 className="animate-spin mx-auto" size={20}/> : "Save Address"}
-                        </button>
-                    </form>
+              <div className="bg-white rounded-3xl p-8 border border-[#1a4332]/20 shadow-xl animate-in slide-in-from-top-4 duration-300">
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="font-bold text-xl">Add New Address</h4>
+                  <button onClick={() => setShowAddressForm(false)} className="text-neutral-400 hover:text-neutral-600"><X size={20} /></button>
                 </div>
+                <form onSubmit={handleAddAddress} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      placeholder="Street Address"
+                      required
+                      value={newAddress.street}
+                      onChange={e => setNewAddress({ ...newAddress, street: e.target.value })}
+                      className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]"
+                    />
+                    <input
+                      placeholder="City"
+                      required
+                      value={newAddress.city}
+                      onChange={e => setNewAddress({ ...newAddress, city: e.target.value })}
+                      className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]"
+                    />
+                    <input
+                      placeholder="State"
+                      required
+                      value={newAddress.state}
+                      onChange={e => setNewAddress({ ...newAddress, state: e.target.value })}
+                      className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]"
+                    />
+                    <input
+                      placeholder="Zip Code"
+                      required
+                      value={newAddress.zip}
+                      onChange={e => setNewAddress({ ...newAddress, zip: e.target.value })}
+                      className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSaving}
+                    className="bg-[#1a4332] text-white font-bold px-8 py-3.5 rounded-2xl shadow-xl shadow-[#1a4332]/20 w-full md:w-auto disabled:opacity-50"
+                  >
+                    {isSaving ? <Loader2 className="animate-spin mx-auto" size={20} /> : "Save Address"}
+                  </button>
+                </form>
+              </div>
             ) : null}
 
-             {addresses.length === 0 && !showAddressForm ? (
+            {addresses.length === 0 && !showAddressForm ? (
               <EmptyState icon={<MapPin size={48} />} message="No addresses saved yet." />
             ) : !showAddressForm ? (
               addresses.map((addr) => (
@@ -242,14 +241,14 @@ export default function AccountPage() {
                 </div>
               ))
             ) : null}
-            
+
             {!showAddressForm && (
-                <button 
-                    onClick={() => setShowAddressForm(true)}
-                    className="w-full py-4 border-2 border-dashed border-neutral-200 rounded-3xl text-neutral-400 font-bold hover:border-[#1a4332] hover:text-[#1a4332] transition-all"
-                >
-                    + Add New Address
-                </button>
+              <button
+                onClick={() => setShowAddressForm(true)}
+                className="w-full py-4 border-2 border-dashed border-neutral-200 rounded-3xl text-neutral-400 font-bold hover:border-[#1a4332] hover:text-[#1a4332] transition-all"
+              >
+                + Add New Address
+              </button>
             )}
           </div>
         );
@@ -259,25 +258,25 @@ export default function AccountPage() {
             <h4 className="font-serif text-2xl font-bold mb-8">Personal Information</h4>
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 <div className="space-y-2">
-                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest ml-1">Full Name</label>
-                    <input 
-                        value={newName} 
-                        onChange={e => setNewName(e.target.value)}
-                        className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]" 
-                    />
-                 </div>
-                 <div className="space-y-2">
-                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest ml-1">Email Address</label>
-                    <input defaultValue={user.email} disabled className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl opacity-50" />
-                 </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest ml-1">Full Name</label>
+                  <input
+                    value={newName}
+                    onChange={e => setNewName(e.target.value)}
+                    className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:outline-none focus:border-[#1a4332]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-400 uppercase tracking-widest ml-1">Email Address</label>
+                  <input defaultValue={user.email} disabled className="w-full px-5 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl opacity-50" />
+                </div>
               </div>
-              <button 
+              <button
                 onClick={handleUpdateProfile}
                 disabled={isSaving || newName === user.name}
                 className="bg-[#1a4332] text-white font-bold px-8 py-3.5 rounded-2xl shadow-xl shadow-[#1a4332]/20 disabled:opacity-50 disabled:shadow-none"
               >
-                {isSaving ? <Loader2 className="animate-spin" size={20}/> : "Save Changes"}
+                {isSaving ? <Loader2 className="animate-spin" size={20} /> : "Save Changes"}
               </button>
             </div>
           </div>
@@ -290,7 +289,7 @@ export default function AccountPage() {
   return (
     <main className="min-h-screen bg-[#FAF9F6] pt-32 pb-20">
       <Navbar />
-      
+
       <div className="container mx-auto px-4 md:px-10">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
@@ -301,10 +300,10 @@ export default function AccountPage() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <aside className="lg:col-span-1 space-y-2">
               <nav className="bg-white/50 backdrop-blur-md rounded-3xl p-4 border border-white/20 sticky top-32">
-                <AccountNavItem icon={<Package size={20}/>} label="Orders" active={activeTab === 'orders'} onClick={() => setActiveTab('orders')} />
-                <AccountNavItem icon={<Heart size={20}/>} label="Favorites" active={activeTab === 'favorites'} onClick={() => setActiveTab('favorites')} />
-                <AccountNavItem icon={<MapPin size={20}/>} label="Addresses" active={activeTab === 'addresses'} onClick={() => setActiveTab('addresses')} />
-                <AccountNavItem icon={<User size={20}/>} label="Profile" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} />
+                <AccountNavItem icon={<Package size={20} />} label="Orders" active={activeTab === 'orders'} onClick={() => setActiveTab('orders')} />
+                <AccountNavItem icon={<Heart size={20} />} label="Favorites" active={activeTab === 'favorites'} onClick={() => setActiveTab('favorites')} />
+                <AccountNavItem icon={<MapPin size={20} />} label="Addresses" active={activeTab === 'addresses'} onClick={() => setActiveTab('addresses')} />
+                <AccountNavItem icon={<User size={20} />} label="Profile" active={activeTab === 'profile'} onClick={() => setActiveTab('profile')} />
                 <div className="my-4 border-t border-neutral-100"></div>
                 <button onClick={() => signOut({ callbackUrl: '/' })} className="w-full flex items-center gap-3 px-4 py-3 text-red-600 font-medium hover:bg-red-50 rounded-xl transition-all"><LogOut size={20} /> Sign Out</button>
               </nav>
@@ -337,9 +336,8 @@ function EmptyState({ icon, message }: { icon: any, message: string }) {
 
 function AccountNavItem({ icon, label, active = false, onClick }: { icon: any, label: string, active?: boolean, onClick: () => void }) {
   return (
-    <button onClick={onClick} className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-medium transition-all ${
-      active ? 'bg-[#1a4332] text-white shadow-lg shadow-[#1a4332]/20' : 'text-neutral-500 hover:bg-white hover:text-[#1a4332]'
-    }`}>
+    <button onClick={onClick} className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-medium transition-all ${active ? 'bg-[#1a4332] text-white shadow-lg shadow-[#1a4332]/20' : 'text-neutral-500 hover:bg-white hover:text-[#1a4332]'
+      }`}>
       {icon}
       {label}
     </button>
