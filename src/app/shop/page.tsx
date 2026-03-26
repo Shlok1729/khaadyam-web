@@ -7,6 +7,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { X, LayoutGrid } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ShopPage(props: {
     searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
